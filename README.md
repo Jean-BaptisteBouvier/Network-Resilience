@@ -11,16 +11,17 @@ We study three different scenarios:
 ## Fully actuated 3-component network
 
 This is an academic example aimed at illustrating the resilience theory for fully actuated systems. The dynamics of the network are
-```\math
-\begin{align}
-    \dot \chi(t) &= \begin{bmatrix} -1 & 0.3 \\ 0.3 & -1 \end{bmatrix} \chi(t) + \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \hat{u}(t) + \begin{bmatrix} 0.3 \\ 0.3 \end{bmatrix} x_q(t), \label{eq:academic X} \\
-    \dot x_q(t) &= -x_q(t) + u_q(t) + 2w_q(t) + \begin{bmatrix} 0.3 & 0.3 \end{bmatrix} \chi(t), \label{eq:academic x_q}
-\end{align}
+
+```math
+\dot \chi(t) = \left(\begin{array}{cc} -1 & 0.3 \\ 0.3 & -1 \end{array}\right) \chi(t) + \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \hat{u}(t) + \begin{bmatrix} 0.3 \\ 0.3 \end{bmatrix} x_q(t),
+```
+```math
+\dot x_q(t) = -x_q(t) + u_q(t) + 2w_q(t) + \begin{array} 0.3 & 0.3 \end{array} \chi(t),
 ```
 with
-\begin{equation*}
-    \chi(0) = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad x_q(0) = 0, \quad \hat{u}(t) = \begin{bmatrix} \hat{u}_1(t) \\ \hat{u}_1(t) \end{bmatrix} \in \hat{\mathcal{U}} = [-1, 1]^2,
-\end{equation*}
+```math
+\chi(0) = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad x_q(0) = 0, \quad \hat{u}(t) = \begin{bmatrix} \hat{u}_1(t) \\ \hat{u}_1(t) \end{bmatrix} \in \hat{\mathcal{U}} = [-1, 1]^2,
+```
 $u_q(t) \in \mathcal{U}_q = [-1, 1]$ and $w_q(t) \in \mathcal{W}_q = [-1, 1]$.
 
 
