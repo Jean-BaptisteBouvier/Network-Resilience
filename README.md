@@ -1,7 +1,31 @@
-# Network Resilience
-Repository for the paper "Resilient Stabilizability of Linear Networks"
+# Resilience of Linear Networks
+
+Repository for the paper "Losing Control of your Network? Try Resilience Theory", which is available on [ArXiv](https://arxiv.org/abs/2306.16588) and submitted to the journal [IEEE Transactions on Control of Network Systems](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6509490).
+Here are all the codes and data necessary to reproduce the simulations of the paper.
+We study three different scenarios:
+- a fully actuated 3-component network losing control over one of its actuators;
+- an underactuated 3-component network losing control over one of its actuators;
+- the IEEE 39-bus system losing control over one of its generator buses.
 
 
+## Fully actuated 3-component network
+
+This is an academic example aimed at illustrating the resilience theory for fully actuated systems. The dynamics of the network are
+```\math
+\begin{align}
+    \dot \chi(t) &= \begin{bmatrix} -1 & 0.3 \\ 0.3 & -1 \end{bmatrix} \chi(t) + \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \hat{u}(t) + \begin{bmatrix} 0.3 \\ 0.3 \end{bmatrix} x_q(t), \label{eq:academic X} \\
+    \dot x_q(t) &= -x_q(t) + u_q(t) + 2w_q(t) + \begin{bmatrix} 0.3 & 0.3 \end{bmatrix} \chi(t), \label{eq:academic x_q}
+\end{align}
+```
+with
+\begin{equation*}
+    \chi(0) = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad x_q(0) = 0, \quad \hat{u}(t) = \begin{bmatrix} \hat{u}_1(t) \\ \hat{u}_1(t) \end{bmatrix} \in \hat{\mathcal{U}} = [-1, 1]^2,
+\end{equation*}
+$u_q(t) \in \mathcal{U}_q = [-1, 1]$ and $w_q(t) \in \mathcal{W}_q = [-1, 1]$.
+
+
+
+## Underactuated 3-component network
 
 ## IEEE 39-bus system
 
@@ -30,7 +54,7 @@ After the loss of control authority over generator bus 39, we split the network 
 ## Citation
 ```
 @article{bouvier2023networks,  
-  title = {},   
+  title = {Losing Control of your Network? Try Resilience Theory},   
   author = {Jean-Baptiste Bouvier and Sai Pushpak Nandanoori and Melkior Ornik},    
   journal = {},    
   year = {2023},   
