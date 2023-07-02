@@ -13,7 +13,7 @@ We study three different scenarios:
 This is an academic example aimed at illustrating the resilience theory for fully actuated systems.
 The dynamics of the network are:
 ```math
-\dot \chi(t) = \left(\begin{array}{cc} -1 & 0.3 \\ 0.3 & -1 \end{array}\right) \chi(t) + \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \hat{u}(t) + \begin{bmatrix} 0.3 \\ 0.3 \end{bmatrix} x_q(t),
+\dot \chi(t) = \begin{bmatrix} -1 & 0.3 \\ 0.3 & -1 \end{bmatrix} \chi(t) + \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \hat{u}(t) + \begin{bmatrix} 0.3 \\ 0.3 \end{bmatrix} x_q(t),
 ```
 ```math
 \dot x_q(t) = -x_q(t) + u_q(t) + 2w_q(t) + \begin{array} 0.3 & 0.3 \end{array} \chi(t),
@@ -31,10 +31,12 @@ To do so, we first solve Lyapunov equations $A_q^\top P_q + P_q A_q = -Q_q$ and 
 Q_q = 1, \quad P_q = 0.5, \quad \hat{Q} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix},\quad \text{and}\quad \hat{P} = \begin{bmatrix} 0.23 & 0.05 \\ 0.05 & 0.5 \end{bmatrix}.
 ```
 Then, the resilient stabilizability conditions established in this paper are satisfied: $\gamma \gamma_q = 0.25 < \alpha \alpha_q = 0.7$ and $\gamma z_{max}^{P_q} = 0.5 < \alpha_q b_{min}^{\hat{P}} = 2$.
-As shown below, $\chi$ is indeed resiliently stabilizable in finite time by $\hat{B}\hat{u} = \frac{-\chi(t)}{\|\chi(t)\|_{\hat{P}}} b_{min}^{\hat{P}}$.
+As shown below, $\chi$ is indeed resiliently stabilizable in finite time by $\hat{B}\hat{u} = \frac{-\chi(t)}{ \\| \chi(t) \\| b_{min}^{\hat{P}}}$.
+
 
 ![Bounding network state](pictures/academic_full_X.png "Bounding network state")
 
+The numbers in parenthesis in the legend of the figures refer to equation numbers used in the [paper](https://arxiv.org/abs/2306.16588).
 The state $x_q$ of the malfunctioning system can also be bounded even in the worst-case scenario as shown below.
 
 ![Bounding malfunctioning network state](pictures/academic_full_x_q.png "Bounding malfunctioning network state")
@@ -89,14 +91,40 @@ These simulations are performed with `test_underactuation.m`.
 
 ## IEEE 39-bus system
 
-Picture of the [IEEE 39-bus system](https://icseg.iti.illinois.edu/ieee-39-bus-system/) from [1].
+We now study the resilience of the IEEE 39-bus system.
+This network is composed of 29 load buses numbered 1 to 29 on the figure below, and 10 generator buses numbered 30 to 39.
+The picture of the [IEEE 39-bus system](https://icseg.iti.illinois.edu/ieee-39-bus-system/) is taken from [1].
 
 ![IEEE 39-bus system](pictures/IEEE_39.PNG "IEEE 39-bus system")
 
 We obtain the linearized network equation from [2].
 After the loss of control authority over generator bus 39, we split the network state between $x_q = \big( \delta_{39}, \dot \delta_{39} \big)$ and $\chi$ for the remaining states.
+The malfunctioning dynamics are
+```math
+    \begin{bmatrix} \dot \delta_{39}(t) \\ \dot \omega_{39}(t) \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ -18.6 & -11.2 \end{bmatrix}  \begin{bmatrix} \delta_{39}(t) \\ \omega_{39}(t) \end{bmatrix} + \begin{bmatrix} 0 \\ 0.22 \end{bmatrix} w_q(t) + D_{q,\_} \chi(t).
+```
+We choose initial states $\chi(0) = \mathbf{1}$, $\delta_{39}(0) = 0$ rad and $\omega_{39}(0) = 0$ Hz.
+Since pair $(\hat{A} + \hat{D}, \hat{B})$ is controllable, we can find a stabilizing gain matrix $K$ for the network dynamics. 
+However, the resilient stability condition $\gamma \gamma_q < \alpha \alpha_q$ is not satisfied.
+Indeed, $\gamma \gamma_q = 6.3 \times 10^4$, while $\alpha \alpha_q = 5.7 \times 10^{-3}$. 
+This magnitude difference leads to the exponential divergence of bounds (15) and (16), as seen below.
 
 ![Evolution of state $\chi$ and its analytical bound](pictures/IEEE_X.png "Evolution of state $\chi$ and its analytical bound")
+
+![Evolution of state $x_q$ and its analytical bounds](pictures/IEEE_x_q.png "Evolution of state $x_q$ and its analytical bounds")
+
+Bound (7) remains a reasonable bound for malfunctioning state $x_q$ over a much longer time horizon as illustrated below.
+
+![Evolution of state $x_q$ and its analytical bound](pictures/IEEE_x_q_long.png "Evolution of state $x_q$ and its analytical bound")
+
+The choice of $K$ ensures admissibility of controller $\hat{u} = -K\chi$ by guaranteeing $\underset{i, t}{\max} |K\chi_i(t)| \leq 1$ as shown below.
+
+![Admissible feedback control](pictures/IEEE_KX.png "Admissible feedback control")
+
+Despite having $\gamma \gamma_q\gg \alpha \alpha_q$, the coupling does not destabilize states $x_q$ and $\chi$, which are both bounded, as shown on this last figure.
+
+![Evolution of states $x_q$ and $\chi$](pictures/IEEE_X_x_q.png "Evolution of states $x_q$ and $\chi$")
+
 
 
 ## File Structure
