@@ -48,8 +48,32 @@ These simulations are performed with `test_full_actuation.m`.
 ## Underactuated 3-component network
 
 
+We now modify $\hat{B}$ not to be full rank anymore, while maintinging controllability of the pair $(\hat{A} + \hat{D}, \hat{B})$.
+The updated network dynamics for $\chi$ are
+```math
+\dot \chi(t) = \begin{bmatrix} -1 & 0.3 \\ 0.3 & -1 \end{bmatrix} \chi(t) + \begin{bmatrix} 2 \\ 0 \end{bmatrix} \hat{u}(t) + \begin{bmatrix} 0.3 \\ 0.3 \end{bmatrix} x_q(t),
+```
+and the dynamics of $x_q$ are left unchanged:
+```math
+\dot x_q(t) = -x_q(t) + u_q(t) + 2w_q(t) + \begin{array} 0.3 & 0.3 \end{array} \chi(t),
+```
+with
+```math
+\chi(0) = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad x_q(0) = 0, \quad \hat{u}(t) = \begin{bmatrix} \hat{u}_1(t) \\ \hat{u}_1(t) \end{bmatrix} \in \hat{\mathcal{U}} = [-1, 1]^2,
+```
+$u_q(t) \in \mathcal{U}_q = [-1, 1]$ and $w_q(t) \in \mathcal{W}_q = [-1, 1]$.
+As previously, we assume a loss of control authority over $w_q$ that control input $u_q$ is still unable to counteract.
+Because of the underactuation of dynamics $\chi$, we cannot use the same controler as above.
+Instead, we determine a gain matrix $K$ and positive definite matrices $\hat{P}$ and $\hat{Q}$ with MATLAB functions `lqr` and `lyap`:
+```math
+K = \begin{bmatrix} 0.64 & 0.15 \end{bmatrix}, \quad \hat{P} = \begin{bmatrix} 0.22 & 0.04 \\ 0.04 & 0.5 \end{bmatrix},\quad \text{and} \quad \hat{Q} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.
+```
+Then, the linear feedback control $\hat{u}(t) := -K\chi(t) \in [-1, 1]$ is admissible as shown below. 
 
+![Admissible control input](pictures/academic_KX.png "Admissible control input")
 
+With this controller the resilience condition $\gamma \gamma_q = 0.24 < \alpha \alpha_q = 0.98$ holds.
+Thus, network state $\chi$ can be resiliently bounded as illustrated below.
 
 ![Bounding network state](pictures/academic_X.png "Bounding network state")
 
@@ -57,10 +81,10 @@ The state $x_q$ of the malfunctioning system can also be bounded even in the wor
 
 ![Bounding malfunctioning network state](pictures/academic_x_q.png "Bounding malfunctioning network state")
 
-
-![Admissible control input](pictures/academic_KX.png "Admissible control input")
-
 These simulations are performed with `test_underactuation.m`.
+
+
+
 
 
 ## IEEE 39-bus system
