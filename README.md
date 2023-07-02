@@ -125,11 +125,17 @@ Despite having $\gamma \gamma_q\gg \alpha \alpha_q$, the coupling does not desta
 
 ![Evolution of states $x_q$ and $\chi$](pictures/IEEE_X_x_q.png "Evolution of states $x_q$ and $\chi$")
 
+These simulations are performed with `main_IEEE_net.m`.
+
+
+
 
 
 ## File Structure
 
-- `main_IEEE_net.m` runs the simulation and compute bounds on the network states.
+- `main_IEEE_net.m` runs the simulation of the IEEE 39-bus network and compute all discussed bounds on the states $\chi$ and $x_q$.
+- `test_full_actuation.m` runs the simulation of the fully actuated 3-component network.
+- `test_underactuation.m` runs the simulation of the underactuated 3-component network.
 - `Pnorm.m` calculates the $P$-norm of a vector $x$ as $\\|x\\|_P = \sqrt{x^\top P x}$, where $P$ is a positive definite matrix.
 
 
