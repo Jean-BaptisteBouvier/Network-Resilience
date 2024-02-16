@@ -109,13 +109,13 @@ However, the resilient stability condition $\gamma \gamma_q < \alpha \alpha_q$ i
 Indeed, $\gamma \gamma_q = 6.3 \times 10^4$, while $\alpha \alpha_q = 5.7 \times 10^{-3}$. 
 This magnitude difference leads to the exponential divergence of bounds (15) and (16), as seen below.
 
-![Evolution of state $\chi$ and its analytical bound](pictures/IEEE_X.png "Evolution of state $\chi$ and its analytical bound")
+![Evolution of the network state and its analytical bound](pictures/IEEE_X.png "Evolution of the network state and its analytical bound")
 
-![Evolution of state $x_q$ and its analytical bounds](pictures/IEEE_x_q.png "Evolution of state $x_q$ and its analytical bounds")
+![Evolution of the malfunctioing state and its analytical bounds](pictures/IEEE_x_q.png "Evolution of the malfunctioing state and its analytical bounds")
 
 Bound (7) remains a reasonable bound for malfunctioning state $x_q$ over a much longer time horizon as illustrated below.
 
-![Evolution of state $x_q$ and its analytical bound](pictures/IEEE_x_q_long.png "Evolution of state $x_q$ and its analytical bound")
+![Evolution of the malfunctioning state and its analytical bound](pictures/IEEE_x_q_long.png "Evolution of the malfunctioning state and its analytical bound")
 
 The choice of $K$ ensures admissibility of controller $\hat{u} = -K\chi$ by guaranteeing $\underset{i, t}{\max} |K\chi_i(t)| \leq 1$ as shown below.
 
@@ -123,7 +123,7 @@ The choice of $K$ ensures admissibility of controller $\hat{u} = -K\chi$ by guar
 
 Despite having $\gamma \gamma_q\gg \alpha \alpha_q$, the coupling does not destabilize states $x_q$ and $\chi$, which are both bounded, as shown on this last figure.
 
-![Evolution of states $x_q$ and $\chi$](pictures/IEEE_X_x_q.png "Evolution of states $x_q$ and $\chi$")
+![Evolution of the network state and the malfunctioning state](pictures/IEEE_X_x_q.png "Evolution of the network state and the malfunctioning state")
 
 These simulations are performed with `main_IEEE_net.m`.
 
