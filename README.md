@@ -1,6 +1,7 @@
 # Resilience of Linear Networks
 
-Repository for the paper "Losing Control of your Network? Try Resilience Theory", which is available on [ArXiv](https://arxiv.org/abs/2306.16588) and submitted to the journal [IEEE Transactions on Control of Network Systems](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6509490).
+Repository for the paper "Losing Control of your Network? Try Resilience Theory", which is available on [ArXiv](https://arxiv.org/abs/2306.16588) and published in the journal [IEEE Transactions on Control of Network Systems](https://ieeexplore.ieee.org/abstract/document/10605041).
+
 Here are all the codes and data necessary to reproduce the simulations of the paper.
 We study three different scenarios:
 - a fully actuated 3-component network losing control over one of its actuators;
@@ -144,17 +145,17 @@ These simulations are performed with `main_IEEE_net.m`.
 
 
 
-
 ## Citation
 ```
 @article{bouvier2023networks,  
-  title = {Losing Control of your Network? Try Resilience Theory},   
+  title = {Losing Control of your Linear Network? Try Resilience Theory},   
   author = {Jean-Baptiste Bouvier and Sai Pushpak Nandanoori and Melkior Ornik},    
-  journal = {},    
-  year = {2023},   
-  volume = {},
-  pages = {},
-  doi = {}
+  journal = {IEEE Transactions on Control of Network Systems},    
+  year = {2025},   
+  volume = {12},
+  number = {1},
+  pages = {980-992},
+  doi = {10.1109/TCNS.2024.3431409}
 }
 ```
 
